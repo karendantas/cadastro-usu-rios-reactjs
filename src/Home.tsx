@@ -8,13 +8,14 @@ const NewCustomerFormSchema = z.object({
   name: z.string(),
   email: z.string(),
   cpf: z.string(),
+  age: z.number(),
   password: z.string(),
 
 })
 
 type NewCustomerFromType = z.infer<typeof NewCustomerFormSchema>
 
-function App() {
+function Home() {
   const {register, handleSubmit} = useForm<NewCustomerFromType>({
     resolver: zodResolver(NewCustomerFormSchema)
   });
@@ -37,6 +38,8 @@ function App() {
 
           <Input type="text" placeholder="CPF" {...register("cpf")}/>
 
+          <Input type = "number" placeholder="Idade" {...register("age")} />
+
           <Input type="password" placeholder="Senha" {...register("password")}/>
 
           <button type="submit" className="bg-pink-500 hover:bg-pink-400 w-[50%] py-4 px-3 mt-5 rounded-md md:text-xl"> Confirmar</button>
@@ -47,4 +50,4 @@ function App() {
   )
 }
 
-export default App
+export default Home

@@ -1,7 +1,7 @@
 
 interface InputProps {
     placeholder?: string
-    type: "text" | "email" | "password"
+    type: "text" | "email" | "password" | "number"
 }
 export function Input({ placeholder, type }: InputProps){
     return (
