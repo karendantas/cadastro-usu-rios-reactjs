@@ -2,7 +2,10 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Input } from "./components/input";
+import { Input } from "../components/input";
+import { useContext } from "react";
+import { UserContext } from "../contexts/usersContexts";
+import { useNavigate } from "react-router-dom";
 
 const NewCustomerFormSchema = z.object({
   name: z.string(),
@@ -16,6 +19,9 @@ const NewCustomerFormSchema = z.object({
 type NewCustomerFromType = z.infer<typeof NewCustomerFormSchema>
 
 function Home() {
+  const {users} = useContext(UserContext);
+  const navigate = useNavigate();
+
   const {register, handleSubmit} = useForm<NewCustomerFromType>({
     resolver: zodResolver(NewCustomerFormSchema)
   });
@@ -24,8 +30,12 @@ function Home() {
     console.log(data);
   }
 
+  function handleGoUserListPage(){
+    navigate('/users');
+  }
+
   return (
-   <main className="max-w-6xl h-screen mx-auto flex justify-center items-center ">
+   <main className="max-w-6xl h-screen mx-auto flex flex-col justify-center items-center ">
       <div className="w-[600px] h-[600px] flex justify-center items-center flex-col border border-pink-500 rounded-md mx-5 shadow-xl shadow-pink-600">
    
         <h2 className="text-2xl mb-11">Cadastro</h2>
@@ -44,8 +54,12 @@ function Home() {
 
           <button type="submit" className="bg-pink-500 hover:bg-pink-400 w-[50%] py-4 px-3 mt-5 rounded-md md:text-xl"> Confirmar</button>
         </form>
-  
+
       </div>
+      <button 
+        className="mt-20 bg-pink-600 hover:bg-pink-500 w-[600px] py-4 px-3 rounded-md md:text-xl"
+        onClick={handleGoUserListPage}
+        > Ver usuários </button>
    </main>
   )
 }

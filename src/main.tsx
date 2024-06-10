@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Home from './Home.tsx'
+
+import { UserContextProvider } from './contexts/usersContexts.tsx'
+import App from './App.tsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>  
-    <Home />
+    <UserContextProvider>
+      
+     <App/>
+    </UserContextProvider>
   </React.StrictMode>,
 )
